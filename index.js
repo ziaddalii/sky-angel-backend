@@ -8,15 +8,15 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-
+// Allow specific origin (your frontend URL)
 const corsOptions = {
-  origin: ["http://localhost:3000"],
-  methods: "GET,POST,PUT,DELETE", 
-  credentials: true, 
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+  credentials: true,
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
+app.use(cors(corsOptions));app.use(express.json());
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -26,7 +26,7 @@ mongoose
 app.use("/api", scoreRoute);
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("Hello world");
 });
 
 const PORT = process.env.PORT || 5000;
