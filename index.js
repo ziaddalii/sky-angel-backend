@@ -1,22 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const scoreRoute = require("./routes/Score");
 const cors = require("cors");
+const scoreRoute = require("./routes/Score");
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-// Allow specific origin (your frontend URL)
-const corsOptions = {
-  origin:'*', 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
 mongoose
   .connect(process.env.MONGO_URI)
