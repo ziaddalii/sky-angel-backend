@@ -7,9 +7,20 @@ const scoreRoute = require("./routes/Score");
 dotenv.config();
 
 const app = express();
-app.use(express.json());
+app.use(cors({
+  origin: '*', // Replace '*' with your frontend's domain for better security
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'X-CSRF-Token', 'X-Requested-With', 'Accept', 'Accept-Version',
+    'Content-Length', 'Content-MD5', 'Content-Type', 'Date', 'X-Api-Version'
+  ],
+  credentials: true
+}));
 
-app.use(cors());
+// Middleware to handle preflight requests
+app.options('*', cors());
+
+// CORS configuration
 app.use(express.json());
 
 mongoose
