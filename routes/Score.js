@@ -4,7 +4,7 @@ const { Score } = require("../models/Score");
 
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("payload", req.body);
     
     const { name, stars, time } = req.body;
 
@@ -15,7 +15,6 @@ router.post("/register", async (req, res) => {
     });
 
     const highScores = await Score.find().sort({ stars: -1 }).limit(10);
-    console.log(highScores);
 
     res.status(200).json({
       message: "successfully registered!",
