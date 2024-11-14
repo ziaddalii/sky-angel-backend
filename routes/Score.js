@@ -14,9 +14,6 @@ router.post("/register", async (req, res) => {
       time,
     });
 
-
-
-    console.log("HELLO WORLD")
     const highScores = await Score.find().sort({ stars: -1 }).limit(10);
     console.log(highScores);
 
